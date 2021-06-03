@@ -1,10 +1,9 @@
 <template>
 <div class="navtypeContainer">
-
     <div class="navWrapper">
             <div class="navListWrapper" ref="scroll1">
                 <ul class="navContent">
-                    <li class="navContentItem" v-for="item in kingkongList" :key="item.cateId">
+                    <li @click="changeNavIndex(index)" class="navContentItem" v-for="(item,index) in kingkongList" :key="item.cateId">
                         <span @click="navBtn(item.cateId)" :class="{active:navid ===item.cateId}">{{item.name}}</span>
                     </li>
                 </ul>
@@ -20,10 +19,13 @@
 <script lang="ts">
 import { defineComponent,ref,onMounted,reactive,computed,watch,nextTick } from 'vue';
 import BScroll from "@better-scroll/core";
-import { Store,useStore } from 'vuex';
-import {useRoute} from "vue-router"
+import { Store,useStore} from 'vuex';
+import {useRoute,useRouter} from "vue-router"
 import ShopList from "../../components/ShopList/ShopList.vue"
 import { SAVE_KINGKONGLIST } from '../../store/modules/mutations_type';
+interface Left {
+  left: number[];
+}
 export default defineComponent({
    components:{
        ShopList
@@ -32,8 +34,12 @@ export default defineComponent({
         let navid = ref(0)
         const store = useStore()
         const route = useRoute()
+        const router = useRouter()
+        const scrollWidth = reactive<Left>({
+        left: [],
+        });
         const scroll1 = ref<HTMLElement|null>(null)
-        let kingkongList = computed({
+        let kingkongList:any = computed({
            get(){
              return store.state.kingkong.kingkongList
            },
@@ -49,10 +55,12 @@ export default defineComponent({
             init()
              let kingkongDatas
              if(sessionStorage.getItem("kingkongListData")!=="undefined"){
-             kingkongDatas =JSON.parse(sessionStorage.getItem("kingkongListData")as string)         
+             kingkongDatas =JSON.parse(sessionStorage.getItem("kingkongListData")as string)   
+             store.commit(SAVE_KINGKONGLIST,kingkongDatas)
              kingkongList.value = kingkongDatas //使用set方法可以赋值
              }
-             
+
+             store.dispatch("getKingkongAction")
              window.addEventListener("unload",()=>{
                  sessionStorage.setItem("kingkongListData",JSON.stringify(kingkongList.value))
             })
@@ -71,19 +79,36 @@ export default defineComponent({
                   click: true, 
                   scrollX: true  
                   })
+                 
               }
              }
         }
-          watch(kingkongList,()=>{
+        function changeNavIndex(index:number){
+            if(scroll1.value){
+                let ul:any =scroll1.value.children
+                ul = Array.from(ul[0].children)
+                let scrollArr = [];
+                scrollArr.push(0)
+                ul.reduce((pre:number,item:any)=>{
+                    //放入数组中
+                    scrollArr.push(pre+item.clientWidth)
+                    //将之前的高度+当前元素的高度
+                    return pre + item.clientWidth
+                },0)
+                 navScroll.scrollTo(-scrollArr[index], 0, 1000)
+            }
+        }
+          watch(kingkongList.value,()=>{
             nextTick(()=>{
                 init()
             })
-        })
+        },{immediate:true})
         function navBtn(cateId:number){
             navid.value = cateId
+            router.replace(`/kingkongList?navType=${cateId}`)
         }
         return{
-                navid,scroll1,kingkongList,route,navBtn
+                navid,scroll1,kingkongList,route,navBtn,changeNavIndex
         }
     }
 })
@@ -94,7 +119,6 @@ export default defineComponent({
         .navWrapper
             background #fafafa
             .navListWrapper
-                position relative
                 width 100%
                 white-space nowrap
                 overflow hidden

@@ -5,52 +5,52 @@
             <div class="text">4.8</div>
             <div class="price">商家评分</div>
         </div>
-        <div>
+        <div class="contentWrapper">
             <div class="content">
-                <span class="contentTextName">口味</span>
-                <span>☆☆☆☆☆</span>
-                <span class="ceontentText">4.8</span>
+                <div class="contentTextName">口味</div>
+                <div class="star"><Stars :rating="4.8"></Stars></div>
+                <div class="ceontentText">4.8</div>
             </div>
             <div class="content">
-                <span class="contentTextName">包装</span>
-                <span>☆☆☆☆☆</span>
-                <span class="ceontentText">4.8</span>
+                <div class="contentTextName">包装</div>
+                <div class="star"><Stars :rating="4.8"></Stars></div>
+                <div class="ceontentText">4.8</div>
             </div>
         </div>
         <div class="right">
-            <span>4.9</span>
-            <div>配送评分</div>
+            <span style="color:#FFB000;font-size:27px">4.9</span>
+            <div style="color:#999;">配送评分</div>
         </div>
     </div>
     <!-- ratingEl标签 -->
     <div class="evaluateContent">
         <div class="evaluateItemWrapper">
             <span class="item active" >全部(150)</span>
-            <span class="item">好评(150)</span>
-            <span class="item">差评(150)</span>
-            <span class="item">有图评价(150)</span>
+            <span class="item">好评(462)</span>
+            <span class="item">差评(11)</span>
+            <span class="item">有图评价(0)</span>
             <span class="item">味道赞(150)</span>
         </div>
     </div>
     <div style="height:20px;background:#fff"></div>
     <!-- 评论内容 -->
-    <div class="ratingContainnerWrapper">
+    <div class="ratingContainnerWrapper" v-for="item in ratingList.data" :key="item.userID">
         <div class="ratingContent">
             <div class="ratingItem">
                 <div class="imgWrapper">
-                    <img src="../../assets/daishutou.png" alt="">
+                    <img  :src="item.userPicUrl?item.userPicUrl:'../../assets/daishutou.png'" alt="">
                 </div>
                 <div class="ratingTextContent">
                         <div class="contentText">
-                            <span class="name">QOP112312576</span>
-                            <span class="time">16分钟送达</span>
+                            <span class="name">{{item.userName}}</span>
+                            <span class="time">{{item.deliveryTime}}</span>
                         </div>
-                        <div class="rightTime">2021-05-25</div>
+                        <div class="rightTime">{{item.commentTime}}</div>
                 </div>
         </div>
             <div class="ratingPText">
                 <span>
-                    好吃，而且分量还不少，今天刚打了疫苗不能吃辣，卖家做的口味刚刚好，价格也不贵，好评！
+                    {{item.content}}
                 </span>
             </div>
             <div class="shopRtring">
@@ -89,8 +89,33 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent,onMounted, reactive } from 'vue';
+import useCurrentInstance from "../../hooks/useCurrentInstance";
+import {useRoute} from "vue-router"
+import Stars from "../Stars/Stars.vue"
 export default defineComponent({
+    components:{
+        Stars
+    },
+    setup(){
+        const { globalProperties } = useCurrentInstance();
+        const route = useRoute()
+        const ratingList = reactive({
+            data:[]
+        })
+        onMounted(() => {
+           getRating()
+        })
+
+        async function getRating(){
+           let result =await globalProperties.$API.reqRating({id:route.params.id})
+           ratingList.data =result.data.list
+        }
+
+        return{
+        ratingList
+        }
+    }
 })
 </script>
 
@@ -113,11 +138,17 @@ export default defineComponent({
                     color #FFB000
                     font-size 27px
                 .price 
-                    color: #999;    
+                    color: #999;  
+        .contentWrapper
+            display flex 
+            flex-direction column                
             .content
-                margin-top 5px
-                span 
-                    margin-left 15px 
+                display flex
+                margin-top 6px
+                div 
+                    margin-left 6px
+                .class="star"
+                    position absolute 
                 .ceontentText    
                     color #FFB000 
                 .contentTextName  

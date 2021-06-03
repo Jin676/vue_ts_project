@@ -31,8 +31,7 @@ export const ReqShops = <T>(latitude:T,longitude:T)=>ajax({
     params:{
       latitude,
       longitude
-    },
-    
+    }, 
   })
 //获取商品
 export const reqCate = ({id}:IcateId)=>ajax({
@@ -41,7 +40,18 @@ export const reqCate = ({id}:IcateId)=>ajax({
         id
     }
 })
-//获取商品
+//searchList
+export const reqSearchList= ()=>ajax({
+    url:"/search",
+})
+//ratings
+export const reqRating= ({id}:IcateId)=>ajax({
+    url:"/rating",
+    params:{
+        id
+    }
+})
+//获取remen
 export const reqHot = ()=>ajax({
     url:"/hot"
 })

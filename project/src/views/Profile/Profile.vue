@@ -44,7 +44,7 @@
                 <img src="../../assets/退出登陆.png" alt="">
                 <span @click="logOut" >退出登陆</span>
             </div>
-            <div> > </div>
+            <div  v-if="tel"> > </div>
          </div>
     </div>
 </div>

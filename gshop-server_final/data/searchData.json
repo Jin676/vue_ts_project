@@ -1,0 +1,155 @@
+[
+    {
+        "content": "阿莫西林",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    },
+    {
+        "content": "阿芮烤鸡爪",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    },
+    {
+        "content": "啊臻味道米粉（双井优鲜语美食城店）",
+        "type": 0,
+        "poiAdditionInfo": {
+            "wmPoiId": "1099049002023177",
+            "status": 1,
+            "statusDesc": "",
+            "shippingTimeInfo": {
+                "inShippingTime": 1,
+                "begShippingTime": "",
+                "statusContent": "",
+                "descContent": "",
+                "reservationStatus": 0
+            },
+            "discounts": [
+                "http://p0.meituan.net/activityconfig/6087b33fd42d14fd94e899084aaef56d1720.png",
+                "http://p0.meituan.net/activityconfig/3da2d9c7a4ddf89e4e71cfdfff168c391088.png"
+            ],
+            "distance": "359m",
+            "shippingFeeTip": "免配送费",
+            "minPriceTip": "起送 ¥20"
+        }
+    },
+    {
+        "content": "阿婆春饼",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    },
+    {
+        "content": "阿香",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    },
+    {
+        "content": "阿香米线",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    },
+    {
+        "content": "奥美拉唑",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    },
+    {
+        "content": "啊臻味道米粉",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    },
+    {
+        "content": "安妮",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    },
+    {
+        "content": "阿奇霉素",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    },
+    {
+        "content": "阿达西",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    },
+    {
+        "content": "爱尚饭包冷面（第2档口+食八方美食城店）",
+        "type": 0,
+        "poiAdditionInfo": {
+            "wmPoiId": "915099847720913",
+            "status": 1,
+            "statusDesc": "",
+            "shippingTimeInfo": {
+                "inShippingTime": 1,
+                "begShippingTime": "",
+                "statusContent": "",
+                "descContent": "",
+                "reservationStatus": 0
+            },
+            "discounts": [
+                "http://p0.meituan.net/activityconfig/6087b33fd42d14fd94e899084aaef56d1720.png",
+                "http://p0.meituan.net/activityconfig/3da2d9c7a4ddf89e4e71cfdfff168c391088.png"
+            ],
+            "distance": "1.1km",
+            "shippingFeeTip": "免配送费",
+            "minPriceTip": "起送 ¥15"
+        }
+    },
+    {
+        "content": "阿里",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    },
+    {
+        "content": "澳门陈光记烧味饭店",
+        "type": 0,
+        "poiAdditionInfo": {
+            "wmPoiId": "1098537900953341",
+            "status": 1,
+            "statusDesc": "",
+            "shippingTimeInfo": {
+                "inShippingTime": 1,
+                "begShippingTime": "",
+                "statusContent": "",
+                "descContent": "",
+                "reservationStatus": 0
+            },
+            "discounts": [
+                "http://p0.meituan.net/activityconfig/6087b33fd42d14fd94e899084aaef56d1720.png",
+                "http://p0.meituan.net/activityconfig/3da2d9c7a4ddf89e4e71cfdfff168c391088.png"
+            ],
+            "distance": "687m",
+            "shippingFeeTip": "免配送费",
+            "minPriceTip": "起送 ¥20"
+        }
+    },
+    {
+        "content": "阿文汤包",
+        "type": 1,
+        "queryAdditionInfo": {
+            "type": "11002"
+        }
+    }
+]

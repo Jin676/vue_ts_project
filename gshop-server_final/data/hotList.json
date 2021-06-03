@@ -1,0 +1,123 @@
+{
+    "data": {
+        "searchHistoryList": [
+            {
+                "wmPoiId": "1007192536253880",
+                "type": 1,
+                "history_search_word": ""
+            }
+        ],
+        "hotLabelList": [
+            {
+                "labelName": "包子",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "烤鸭",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "水果",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "板面",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "黄焖鸡",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "麻辣烫",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "汉堡",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "麻辣拌",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "烤冷面",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "烧烤",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "寿司",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "水果捞",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "花甲粉",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "披萨",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            },
+            {
+                "labelName": "卷饼",
+                "wmPoiId": "0",
+                "labelType": 12002,
+                "wordType": 0,
+                "queryWordType": 0
+            }
+        ],
+        "recommendPoi": {
+            "nextPage": 0,
+            "isShowChangeButton": false,
+            "recommendPoiList": []
+        }
+    }
+}

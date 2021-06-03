@@ -1,5 +1,6 @@
 import { Commit } from "vuex"
 import {SAVE_KINGKONGLIST} from "./mutations_type"
+import {reqKingkong} from "../../api"
 const state={
     kingkongList:[]
 }
@@ -10,7 +11,10 @@ interface Icommit{
 
 
 const actions={
-   
+   async getKingkongAction({commit}:Icommit){
+    let result = await reqKingkong()
+    commit(SAVE_KINGKONGLIST,result.data)
+   }
 }
 
 const mutations={

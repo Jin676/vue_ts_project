@@ -28,7 +28,7 @@
 <script lang="ts">
 import { computed, defineComponent,onMounted,ref, watch } from 'vue';
 import {Store, useStore} from"vuex"
-import {Router, useRouter} from "vue-router"
+import {Router, useRouter,useRoute} from "vue-router"
 import Stars from "../Stars/Stars.vue"
 export default defineComponent({
     components:{
@@ -46,28 +46,39 @@ export default defineComponent({
     },
     setup(props,{emit}){
         const router:Router= useRouter()
+        const route= useRoute()
         const store:Store<any> = useStore()
         const shopListDatas:any = ref([])
+
+           
         onMounted(() => {
             store.dispatch("getShops")
-            // console.log(shopListDatas.value)
         })
         const shopListData:any=computed(()=>{
                 return store.state.shopList.shopListData
          })
-       
+
         function toCate(id:number){
             //router.push(`/cate/${id}/menu`)
             router.push(`/cate/${id}/menu`)
         }
+        //传入的navid
         watch(()=>props.navid,()=>{
-            shopListDatas.value = shopListData.value.filter((item:any)=>item.navType ===props.navid)
+            if(props.navid !== 0){
+                shopListDatas.value = shopListData.value.filter((item:any)=>item.navType ===props.navid)
+               
+            }
        },{immediate:true})
-
+       
+       //监视msite中数据
         watch(()=>props.shopListData,()=>{
         shopListDatas.value = props.shopListData
        },{immediate:true})
 
+        //监视shopListData,不加value
+        watch(shopListData,()=>{
+             shopListDatas.value = shopListData.value.filter((item:any)=>item.navType ===props.navid)
+        })
         return {
             shopListDatas,toCate
         }

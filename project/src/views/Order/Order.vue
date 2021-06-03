@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container" v-if="!change">
     <div class="header">
         <div class="left">
             <img src="../../assets/店铺图片.jpg" alt="">
@@ -22,16 +22,27 @@
     <div class="after">
         <div>已完成</div>
         <div class="right">
-            <div class="remove">删除</div>
-            <div class="btn">再来一单</div>
+            <div class="remove" @click="controle">删除</div>
+            <!-- <div class="btn">再来一单</div> -->
         </div>
     </div>
 </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent,ref } from 'vue';
 export default defineComponent({
+    setup(){
+        const change =ref(false)
+        function controle(){
+            if(confirm("确定删除订单吗?")){
+                change.value = !change.value
+            }
+        }
+        return{
+            change,controle
+        }
+    }
 })
 </script>
 

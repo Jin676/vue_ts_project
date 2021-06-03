@@ -4,7 +4,7 @@
     <div class="leftP" v-if="addressB">
         <div>{{addressB.address}}</div>
     </div>
-    <div class="rightIpt">
+    <div class="rightIpt" :class="{clickSty}">
         <span class="iconfont iconsousuo"></span>
         <button @click="toSearch">请输入您想查找的商品</button>
     </div>
@@ -53,16 +53,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, getCurrentInstance,onMounted, reactive, ref, watch } from 'vue';
+import { computed, defineComponent,onMounted } from 'vue';
 import useCurrentInstance from "../../hooks/useCurrentInstance";
 import ShopList from "../../components/ShopList/ShopList.vue"
-import SwiperCore, { Navigation, Pagination, Autoplay, A11y } from "swiper";
+import SwiperCore, { Pagination, Autoplay, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import"../../../public/css/swiper.css"
-import {RouteLocationNormalizedLoaded, Router, useRoute,useRouter}from "vue-router"
+import { Router,useRouter}from "vue-router"
 import {Store, useStore} from"vuex"
 import _ from "lodash"
-import { SAVE_KINGKONGLIST } from '../../store/modules/mutations_type';
 SwiperCore.use([ Pagination, Autoplay, A11y]);
 export default defineComponent({
     components: {
@@ -73,32 +72,23 @@ export default defineComponent({
     setup(){
     const { globalProperties } = useCurrentInstance();
     const router:Router= useRouter()
-    const route:RouteLocationNormalizedLoaded = useRoute()
     const store:Store<any> = useStore()
-    
-    let kingkongList = ref([])
 
     const shopListData=computed(()=>{
         return store.state.shopList.shopListData
      })
-    // console.log(shopListData) 
     onMounted(() => {
-        kingkongdata()
+        store.dispatch("getKingkongAction")
         store.dispatch("getAddress")
     })
 
     const addressB=computed(()=>{
         return store.state.addressA.address
     })
-    
-    const kingkongdata=async()=>{
-        //getCurrentInstance不要使用ctx获取，生产环境下回报错
-        const result = await globalProperties.$API.reqKingkong()
-        let kingkongdata =  result.data
-        kingkongList.value = kingkongdata
-        //  kingkongList.value =_.chunk(kingkongdata,10);
-        store.commit(SAVE_KINGKONGLIST,kingkongList.value)
-    }
+    const kingkongList = computed(()=>{
+        return store.state.kingkong.kingkongList
+    })
+
     function toSearch(){
       router.push("/search")
     }
@@ -129,7 +119,6 @@ export default defineComponent({
     function zonghe(){
         store.dispatch("getShops")
     }
-     
 
         return{
             kingkongList,globalProperties,toSearch,addressB,ratingSort,distanceTop,monthSalesTipTop,zonghe,router,shopListData

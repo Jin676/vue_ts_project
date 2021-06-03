@@ -1,6 +1,7 @@
 <template>
 <div class="searchContainer">
-    <div class="searchHeader">
+ 
+        <div class="searchHeader">
         <div @click="router.back()"><i class="iconfont iconhuitui"></i></div>
         <div class="title">搜索页</div>
     </div>
@@ -8,13 +9,19 @@
         <div class="searchIpt">
         <form action="">
             <span class="iconfont iconsousuo"></span>
-            <input  type="text" placeholder="请输入商家或商品名称">
+            <input v-model="searchIpt" @input="change" type="text" placeholder="请输入商家或商品名称">
         </form>
     </div>
     <div class="search">搜索</div>
+    
+    <div class="searchList" v-if="searchIpt">
+        <div class="searchListItem" v-for="(item,index) in searchList.data" :key="index">
+            <div class="imgWrapper"><img src="../../assets/icon/search.png" alt=""></div>
+            <div class="textT"><span>{{item.content}}</span></div>
+        </div>
     </div>
-
-    <div class="hotSearch">
+    </div>
+    <div class="hotSearch" v-if="!searchIpt">
         <div class="hotTitle">
             <span>热门搜索</span>
         </div>
@@ -24,7 +31,7 @@
         </div>
         </div>
     </div>
-    <div class="hotSearch" style="margin-top:20px">
+    <div class="hotSearch" style="margin-top:20px" v-if="!searchIpt">
         <div class="hotTitle">
             <span>历史搜索</span>
         </div>
@@ -44,19 +51,22 @@
         </div>
     </div>
 
-   
-    
 </div>
 </template>
 
 <script lang="ts">
-import { defineComponent,onMounted, reactive } from 'vue';
+import { defineComponent,onMounted, reactive, ref } from 'vue';
 import {useRouter} from "vue-router"
 import useCurrentInstance from "../../hooks/useCurrentInstance";
+import _ from "lodash"
 export default defineComponent({
     setup(){
         const router = useRouter()
         const { globalProperties } = useCurrentInstance();
+        const searchIpt = ref("")
+        const searchList = reactive({
+            data:[]
+        })
         const hotList = reactive({
             data:[]
         })
@@ -67,8 +77,15 @@ export default defineComponent({
             let result = await globalProperties.$API.reqHot()
             hotList.data = result.data.data.hotLabelList
         }
+      
+       async function change(){
+           _.debounce(async function(){
+                let result = await globalProperties.$API.reqSearchList()
+                searchList.data = result.data
+            },300)()              
+        }
         return{
-            router,hotList
+            router,hotList,searchIpt,change,searchList
         }
     }
 })
@@ -78,7 +95,8 @@ export default defineComponent({
 @import "../../common/mixins.styl"
   .searchContainer
     box-sizing border-box
-    padding 0 10px 
+    padding-left 10px
+    position relative
     .searchHeader
         display flex
         width 100%
@@ -107,6 +125,26 @@ export default defineComponent({
             width 60px
             line-height 30px   
             text-align center
+        .searchList
+            position absolute
+            width 92%
+            height 450px
+            top 105px   
+            .searchListItem
+                position relative
+                display  flex
+                padding 10px 
+                bottom-border-1px(#eee)
+                .imgWrapper
+                    width 15px
+                    height 15px 
+                    img
+                        width 100%
+                        height 100% 
+                .textT
+                    margin-left 10px        
+                      
+                               
     .hotSearch
         .hotTitle
             height 41px        

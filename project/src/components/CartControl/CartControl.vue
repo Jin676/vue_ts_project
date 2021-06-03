@@ -19,10 +19,9 @@ export default defineComponent({
         }
     },
     setup(food) {
-        
         const store = useStore()
         function changeFoodCount(isAdd){
-            //将传进来的food再传到vuex中进行修改
+            //将传进来的food再传到vuex中进行修改,food是点击的单项商品
            store.dispatch("changeFoodCount",{isAdd,food:food.food})
             
         }
